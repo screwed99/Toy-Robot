@@ -23,8 +23,22 @@ namespace ToyRobot
                 tableDimensions,
                 textOutputter);
             var orientationFactory = new OrientationFactory();
-            this.CommandReader = new CommandReader(
-                toyRobot, commandPerformerFactory, orientationFactory);
+            var reportCommandParser = new ReportCommandParser(commandPerformerFactory);
+            var moveCommandParser = new MoveCommandParser(commandPerformerFactory);
+            var leftCommandParser = new LeftCommandParser(commandPerformerFactory);
+            var rightCommandParser = new RightCommandParser(commandPerformerFactory);
+            var placeCommandParser = new PlaceCommandParser(
+                commandPerformerFactory, orientationFactory);
+            var commandParsers = new ICommandParser[]
+                {
+                    reportCommandParser,
+                    moveCommandParser,
+                    leftCommandParser,
+                    rightCommandParser,
+                    placeCommandParser
+                };
+            var masterCommandParser = new MasterCommandParser(commandParsers);
+            this.CommandReader = new CommandReader(toyRobot, masterCommandParser);
         } 
     }
 }
