@@ -1,5 +1,3 @@
-using System;
-
 namespace ToyRobot
 {
     public interface ICommandPerformer

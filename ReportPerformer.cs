@@ -1,5 +1,3 @@
-using System;
-
 namespace ToyRobot
 {
     public sealed class ReportPerformer : ICommandPerformer
@@ -24,19 +22,6 @@ namespace ToyRobot
             }
 
             return currentState;
-        }
-    }
-
-    public interface ITextOutputter
-    {
-        void WriteLine(string output);
-    }
-
-    public sealed class TextOutputter : ITextOutputter
-    {
-        public void WriteLine(string output)
-        {
-            Console.WriteLine(output);
         }
     }
 }

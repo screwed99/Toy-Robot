@@ -1,12 +1,5 @@
-using System;
-
 namespace ToyRobot
 {
-    public interface IRobotStateBuilderFactory
-    {
-        IRobotStateBuilder CreateBuilderFromPrototype(IRobotState robotState);
-    }
-
     public sealed class RobotStateBuilderFactory : IRobotStateBuilderFactory
     {
         public IRobotStateBuilder CreateBuilderFromPrototype(IRobotState robotState)
