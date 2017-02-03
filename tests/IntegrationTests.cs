@@ -7,14 +7,18 @@ namespace ToyRobot.Tests
     public sealed class IntegrationTests : IDisposable
     {
         private MockRepository mockRepository;
+        private Mock<ITextInputter> textInputter;
         private Mock<ITextOutputter> textOutputter;
         private ToyRobotAssembly toyRobotAssembly;
         
         public IntegrationTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
+            this.textInputter = this.mockRepository.Create<ITextInputter>();
             this.textOutputter = this.mockRepository.Create<ITextOutputter>();
-            this.toyRobotAssembly = new ToyRobotAssembly(this.textOutputter.Object);
+            this.toyRobotAssembly = new ToyRobotAssembly(
+                this.textInputter.Object,
+                this.textOutputter.Object);
         }
 
         [Fact]
@@ -32,8 +36,9 @@ namespace ToyRobot.Tests
 					"MOVE",
 					"REPORT"
 				};
+            this.textInputter.Setup(i => i.GetAllLines()).Returns(input);
 			this.textOutputter.Setup(o => o.WriteLine("3,4,WEST"));
-			this.toyRobotAssembly.CommandReader.Read(input);
+			this.toyRobotAssembly.ToyRobotDriver.Run();
 			this.textOutputter.Verify(o => o.WriteLine("3,4,WEST"));
         }
 

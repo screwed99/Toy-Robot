@@ -2,16 +2,19 @@ namespace ToyRobot
 {
     public sealed class ToyRobotAssembly
     {
-        public readonly ICommandReader CommandReader;
+        public readonly ToyRobotDriver ToyRobotDriver;
 
-        public ToyRobotAssembly(ITextOutputter textOutputter)
+        public ToyRobotAssembly(ITextInputter textInputter, ITextOutputter textOutputter)
         {
             var toyRobot = new ToyRobot();
             var robotStateFactory = new RobotStateFactory();
             var robotStateBuilderFactory = new RobotStateBuilderFactory();
-            var leftOrientationTurner = new LeftOrientationTurner(robotStateBuilderFactory);
-            var rightOrientationTurner = new RightOrientationTurner(robotStateBuilderFactory);
-            var moveStateTransformer = new MoveStateTransformer(robotStateBuilderFactory);
+            var leftOrientationTurner =
+                new LeftOrientationTurner(robotStateBuilderFactory);
+            var rightOrientationTurner =
+                new RightOrientationTurner(robotStateBuilderFactory);
+            var moveStateTransformer =
+                new MoveStateTransformer(robotStateBuilderFactory);
             var tableDimensions = new TableDimensions();
             var moveAttempter = new MoveAttempter(
                 moveStateTransformer, tableDimensions, robotStateFactory);
@@ -38,7 +41,8 @@ namespace ToyRobot
                     placeCommandParser
                 };
             var masterCommandParser = new MasterCommandParser(commandParsers);
-            this.CommandReader = new CommandReader(toyRobot, masterCommandParser);
+            var commandReader = new CommandReader(toyRobot, masterCommandParser);
+            this.ToyRobotDriver = new ToyRobotDriver(textInputter, commandReader);
         } 
     }
 }

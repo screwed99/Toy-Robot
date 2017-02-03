@@ -1,28 +1,14 @@
-﻿using System.Collections.Generic;
-using System;
-
-namespace ToyRobot
+﻿namespace ToyRobot
 {
     public static class Program 
 	{
 		public static void Main(string[] args) 
 		{
+			var textInputter = new TextInputter();
             var textOutputter = new TextOutputter();
-			var toyRobotAssembly = new ToyRobotAssembly(textOutputter);
-			var commandReader = toyRobotAssembly.CommandReader;
-			commandReader.Read(GetAllLines());			
-		}
-
-		private static IReadOnlyCollection<string> GetAllLines()
-		{
-			List<string> input = new List<string>();
-			string line;
-			while ((line = Console.ReadLine()) != null)
-			{
-				input.Add(line);
-			}
-
-			return input;
+			var toyRobotAssembly = new ToyRobotAssembly(textInputter, textOutputter);
+			var driver = toyRobotAssembly.ToyRobotDriver;
+			driver.Run();
 		}
 	}
 }
