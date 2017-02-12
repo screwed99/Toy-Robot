@@ -4,12 +4,12 @@ namespace ToyRobot
 {
     public sealed class CommandPerformerFactory : ICommandPerformerFactory
     {
-        private IRobotStateFactory robotStateFactory;
-        private IOrientationTurner leftOrientationTurner;
-        private IOrientationTurner rightOrientationTurner;
-        private IMoveAttempter moveAttempter;
-        private ITableDimensions tableDimensions;
-        private ITextOutputter textOutputter;
+        private readonly IRobotStateFactory robotStateFactory;
+        private readonly IOrientationTurner leftOrientationTurner;
+        private readonly IOrientationTurner rightOrientationTurner;
+        private readonly IMoveAttempter moveAttempter;
+        private readonly ITableDimensions tableDimensions;
+        private readonly ITextOutputter textOutputter;
 
         public CommandPerformerFactory(
             IRobotStateFactory robotStateFactory,
@@ -37,19 +37,14 @@ namespace ToyRobot
             return new MovePerformer(this.moveAttempter);
         }
         
-        public ICommandPerformer CreateTurnPerformer(TurnDirection turnDirection)
+        public ICommandPerformer CreateLeftTurnPerformer()
         {
-            switch (turnDirection)
-            {
-                case TurnDirection.Left:
-                    return new TurnPerformer(this.leftOrientationTurner);
-                case TurnDirection.Right:
-                    return new TurnPerformer(this.rightOrientationTurner);
-                default:
-                    var exceptionMessage =
-                        string.Format("unexpected turn direction {0}", turnDirection);
-                    throw new Exception(exceptionMessage);
-            }
+            return new TurnPerformer(this.leftOrientationTurner);
+        }
+
+        public ICommandPerformer CreateRightTurnPerformer()
+        {
+            return new TurnPerformer(this.rightOrientationTurner);
         }
 
         public ICommandPerformer CreatePlacePerformer(

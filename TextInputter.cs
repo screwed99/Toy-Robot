@@ -7,7 +7,7 @@ namespace ToyRobot
 	{
 		public IReadOnlyCollection<string> GetAllLines()
 		{
-			List<string> input = new List<string>();
+			var input = new List<string>();
 			string line;
 			while ((line = Console.ReadLine()) != null)
 			{

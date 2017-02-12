@@ -2,9 +2,9 @@ namespace ToyRobot
 {
     public sealed class RobotState : IRobotState
     {
-        private int xCoordinate;
-        private int yCoordinate;
-        private IOrientation orientation;
+        private readonly int xCoordinate;
+        private readonly int yCoordinate;
+        private readonly IOrientation orientation;
         
         public RobotState(int xCoordinate, int yCoordinate, IOrientation orientation)
         {

@@ -4,7 +4,7 @@ namespace ToyRobot
 {
     public sealed class Orientation : IOrientation
     {
-        private CompassDirection compassDirection;
+        private readonly CompassDirection compassDirection;
 
         public Orientation(CompassDirection compassDirection)
         {

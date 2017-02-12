@@ -23,7 +23,7 @@ namespace ToyRobot.Tests
         public void TryGetCommandPerformer_WithLeftMessage_ReturnsLeftTurnPerformer()
         {
             var turnPerformer = this.mockRepository.Create<ICommandPerformer>();
-            this.commandPerformerFactory.Setup(f => f.CreateTurnPerformer(TurnDirection.Left))
+            this.commandPerformerFactory.Setup(f => f.CreateLeftTurnPerformer())
                 .Returns(turnPerformer.Object);
             ICommandPerformer commandPerformer;
             Assert.True(

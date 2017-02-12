@@ -2,18 +2,15 @@ namespace ToyRobot
 {
     public sealed class MoveAttempter : IMoveAttempter
     {
-        private IMoveStateTransformer moveStateTransformer;
-        private ITableDimensions tableDimensions;
-        private IRobotStateFactory robotStateFactory;
+        private readonly IMoveStateTransformer moveStateTransformer;
+        private readonly ITableDimensions tableDimensions;
 
         public MoveAttempter(
             IMoveStateTransformer moveStateTransformer,
-            ITableDimensions tableDimensions,
-            IRobotStateFactory robotStateFactory)
+            ITableDimensions tableDimensions)
         {
             this.moveStateTransformer = moveStateTransformer;
             this.tableDimensions = tableDimensions;
-            this.robotStateFactory = robotStateFactory;
         }
 
         public IRobotState Attempt(IRobotState currentState)

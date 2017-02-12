@@ -2,7 +2,7 @@ namespace ToyRobot
 {
     public sealed class TurnPerformer : ICommandPerformer
     {
-        private IOrientationTurner orientationTurner;
+        private readonly IOrientationTurner orientationTurner;
         
         public TurnPerformer(IOrientationTurner orientationTurner)
         {

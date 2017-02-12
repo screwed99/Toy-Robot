@@ -6,13 +6,9 @@ namespace ToyRobot.Tests
 {
     public sealed class MoveAttempterTests : IDisposable
     {
-        private const int xCoordinate = 1;
-        private const int yCoordinate = 3;
-        
         private MockRepository mockRepository;
         private Mock<IMoveStateTransformer> moveStateTransformer;
         private Mock<ITableDimensions> tableDimensions;
-        private Mock<IRobotStateFactory> robotStateFactory;
         private MoveAttempter moveAttempter;
         
         public MoveAttempterTests()
@@ -20,11 +16,9 @@ namespace ToyRobot.Tests
             this.mockRepository = new MockRepository(MockBehavior.Strict);
             this.moveStateTransformer = this.mockRepository.Create<IMoveStateTransformer>();
             this.tableDimensions = this.mockRepository.Create<ITableDimensions>();
-            this.robotStateFactory = this.mockRepository.Create<IRobotStateFactory>();
             this.moveAttempter = new MoveAttempter(
                 this.moveStateTransformer.Object,
-                this.tableDimensions.Object,
-                this.robotStateFactory.Object);
+                this.tableDimensions.Object);
         }
 
         [Fact]

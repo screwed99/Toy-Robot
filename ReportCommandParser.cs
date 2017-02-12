@@ -2,7 +2,8 @@ namespace ToyRobot
 {
     public sealed class ReportCommandParser : ICommandParser
     {
-        private ICommandPerformerFactory commandPerformerFactory;
+        private readonly ICommandPerformerFactory commandPerformerFactory;
+
         public ReportCommandParser(ICommandPerformerFactory commandPerformerFactory)
         {
             this.commandPerformerFactory = commandPerformerFactory;

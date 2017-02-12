@@ -4,24 +4,18 @@ namespace ToyRobot
 {
     public sealed class CommandReader : ICommandReader
     {
-        private IToyRobot toyRobot;
-        private ICommandParser commandParser;
+        private readonly ICommandHandler commandHandler;
         
-        public CommandReader(IToyRobot toyRobot, ICommandParser commandParser)
+        public CommandReader(ICommandHandler commandHandler)
         {
-            this.toyRobot = toyRobot;
-            this.commandParser = commandParser;
+            this.commandHandler = commandHandler;
         }
 
         public void Read(IReadOnlyCollection<string> unparsedCommands)
         {
             foreach (var unparsedCommand in unparsedCommands)
             {
-                ICommandPerformer commandPerformer;
-                if (this.commandParser.TryGetCommandPerformer(unparsedCommand, out commandPerformer))
-                {
-                    this.toyRobot.Update(commandPerformer); 
-                }
+                this.commandHandler.Handle(unparsedCommand);
             }
         }
     }

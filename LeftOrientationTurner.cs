@@ -4,7 +4,7 @@ namespace ToyRobot
 {
     public sealed class LeftOrientationTurner : IOrientationTurner
     {
-        IRobotStateBuilderFactory robotStateBuilderFactory;
+        readonly IRobotStateBuilderFactory robotStateBuilderFactory;
 
         public LeftOrientationTurner(IRobotStateBuilderFactory robotStateBuilderFactory)
         {

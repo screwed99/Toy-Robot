@@ -9,12 +9,12 @@ namespace ToyRobot
             return CheckXCoordinate(xCoordinate) && CheckYCoordinate(yCoordinate);
         }
 
-        private bool CheckXCoordinate(int xCoordinate)
+        private static bool CheckXCoordinate(int xCoordinate)
         {
             return xCoordinate >= 0 && xCoordinate < 5;
         }
 
-        private bool CheckYCoordinate(int yCoordinate)
+        private static bool CheckYCoordinate(int yCoordinate)
         {
             return yCoordinate >= 0 && yCoordinate < 5;
         }

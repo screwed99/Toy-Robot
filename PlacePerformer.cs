@@ -2,11 +2,11 @@ namespace ToyRobot
 {    
     public sealed class PlacePerformer : ICommandPerformer
     {
-        private IRobotStateFactory robotStateFactory;
-        private ITableDimensions tableDimensions;
-        private int xCoordinate;
-        private int yCoordinate;
-        private IOrientation orientation;
+        private readonly IRobotStateFactory robotStateFactory;
+        private readonly ITableDimensions tableDimensions;
+        private readonly int xCoordinate;
+        private readonly int yCoordinate;
+        private readonly IOrientation orientation;
         
         public PlacePerformer(
             IRobotStateFactory robotStateFactory,

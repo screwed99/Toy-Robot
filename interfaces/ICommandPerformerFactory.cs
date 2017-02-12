@@ -6,7 +6,9 @@ namespace ToyRobot
         
         ICommandPerformer CreateMovePerformer();
 
-        ICommandPerformer CreateTurnPerformer(TurnDirection turnDirection);
+        ICommandPerformer CreateLeftTurnPerformer();
+
+        ICommandPerformer CreateRightTurnPerformer();
 
         ICommandPerformer CreatePlacePerformer(
             int xCoordinate,

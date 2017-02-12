@@ -4,7 +4,7 @@ namespace ToyRobot
 {
     public sealed class MoveStateTransformer : IMoveStateTransformer
     {
-        private IRobotStateBuilderFactory robotStateBuilderFactory;
+        private readonly IRobotStateBuilderFactory robotStateBuilderFactory;
 
         public MoveStateTransformer(IRobotStateBuilderFactory robotStateBuilderFactory)
         {
@@ -33,11 +33,12 @@ namespace ToyRobot
             }
         }
 
-        private IRobotState SetNewX(IRobotStateBuilder robotStateBuilder, int newX)
+        private static IRobotState SetNewX(IRobotStateBuilder robotStateBuilder, int newX)
         {
             return robotStateBuilder.WithX(newX).Build();
         }
-        private IRobotState SetNewY(IRobotStateBuilder robotStateBuilder, int newY)
+
+        private static IRobotState SetNewY(IRobotStateBuilder robotStateBuilder, int newY)
         {
             return robotStateBuilder.WithY(newY).Build();
         }

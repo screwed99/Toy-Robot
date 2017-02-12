@@ -2,15 +2,15 @@ namespace ToyRobot
 {
     public sealed class PlaceCommandParser : ICommandParser
     {
-        private ICommandPerformerFactory commandPerformerFactory;
-        private IOrientationFactory orientationFactory;
+        private readonly ICommandPerformerFactory commandPerformerFactory;
+        private readonly IOrientationParser orientationParser;
 
         public PlaceCommandParser(
             ICommandPerformerFactory commandPerformerFactory,
-            IOrientationFactory orientationFactory)
+            IOrientationParser orientationParser)
         {
             this.commandPerformerFactory = commandPerformerFactory;
-            this.orientationFactory = orientationFactory;
+            this.orientationParser = orientationParser;
         }
         
         public bool TryGetCommandPerformer(
@@ -44,8 +44,8 @@ namespace ToyRobot
                 return false;
             }
 
-            var orientation = this.orientationFactory.Create(unparsedState[2]);
-            if (!orientation.IsValid())
+            IOrientation orientation;
+            if (!this.orientationParser.TryParse(unparsedState[2], out orientation))
             {
                 commandPerformer = null;
                 return false;

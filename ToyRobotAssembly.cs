@@ -6,7 +6,8 @@ namespace ToyRobot
 
         public ToyRobotAssembly(ITextInputter textInputter, ITextOutputter textOutputter)
         {
-            var toyRobot = new ToyRobot();
+            var initialRobotState = new NotPlacedRobotState();
+            var toyRobot = new ToyRobot(initialRobotState);
             var robotStateFactory = new RobotStateFactory();
             var robotStateBuilderFactory = new RobotStateBuilderFactory();
             var leftOrientationTurner =
@@ -16,8 +17,7 @@ namespace ToyRobot
             var moveStateTransformer =
                 new MoveStateTransformer(robotStateBuilderFactory);
             var tableDimensions = new TableDimensions();
-            var moveAttempter = new MoveAttempter(
-                moveStateTransformer, tableDimensions, robotStateFactory);
+            var moveAttempter = new MoveAttempter(moveStateTransformer, tableDimensions);
             var commandPerformerFactory = new CommandPerformerFactory(
                 robotStateFactory,
                 leftOrientationTurner,
@@ -25,7 +25,7 @@ namespace ToyRobot
                 moveAttempter,
                 tableDimensions,
                 textOutputter);
-            var orientationFactory = new OrientationFactory();
+            var orientationFactory = new OrientationParser();
             var reportCommandParser = new ReportCommandParser(commandPerformerFactory);
             var moveCommandParser = new MoveCommandParser(commandPerformerFactory);
             var leftCommandParser = new LeftCommandParser(commandPerformerFactory);
@@ -41,7 +41,8 @@ namespace ToyRobot
                     placeCommandParser
                 };
             var masterCommandParser = new MasterCommandParser(commandParsers);
-            var commandReader = new CommandReader(toyRobot, masterCommandParser);
+            var commandHander = new CommandHandler(toyRobot, masterCommandParser);
+            var commandReader = new CommandReader(commandHander);
             this.ToyRobotDriver = new ToyRobotDriver(textInputter, commandReader);
         } 
     }

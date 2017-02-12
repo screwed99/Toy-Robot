@@ -2,7 +2,7 @@ namespace ToyRobot
 {
     public sealed class ReportPerformer : ICommandPerformer
     {
-        private ITextOutputter textOutputter;
+        private readonly ITextOutputter textOutputter;
 
         public ReportPerformer(ITextOutputter textOutputter)
         {

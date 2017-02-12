@@ -2,7 +2,7 @@ namespace ToyRobot
 {    
     public sealed class MovePerformer : ICommandPerformer
     {
-        private IMoveAttempter moveAttempter;
+        private readonly IMoveAttempter moveAttempter;
         
         public MovePerformer(IMoveAttempter moveAttempter)
         {

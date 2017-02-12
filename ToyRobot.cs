@@ -2,7 +2,12 @@ namespace ToyRobot
 {
     public sealed class ToyRobot : IToyRobot
     {
-        private IRobotState robotState = new NotPlacedRobotState();
+        private IRobotState robotState;
+
+        public ToyRobot(IRobotState robotState)
+        {
+            this.robotState = robotState;
+        }
 
         public void Update(ICommandPerformer commandPerformer)
         {

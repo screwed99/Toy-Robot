@@ -2,7 +2,8 @@ namespace ToyRobot
 {
     public sealed class LeftCommandParser : ICommandParser
     {
-        private ICommandPerformerFactory commandPerformerFactory;
+        private readonly ICommandPerformerFactory commandPerformerFactory;
+
         public LeftCommandParser(ICommandPerformerFactory commandPerformerFactory)
         {
             this.commandPerformerFactory = commandPerformerFactory;
@@ -13,8 +14,7 @@ namespace ToyRobot
         {
             if (unparsedCommand == "LEFT")
             {
-                commandPerformer = this.commandPerformerFactory.CreateTurnPerformer
-                    (TurnDirection.Left);
+                commandPerformer = this.commandPerformerFactory.CreateLeftTurnPerformer();
                 return true;
             }
 

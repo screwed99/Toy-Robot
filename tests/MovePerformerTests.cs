@@ -6,9 +6,6 @@ namespace ToyRobot.Tests
 {
     public sealed class MovePerformerTests : IDisposable
     {
-        private const int xCoordinate = 1;
-        private const int yCoordinate = 3;
-        
         private MockRepository mockRepository;
         private Mock<IMoveAttempter> moveAttempter;
         private MovePerformer movePerformer;
