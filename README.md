@@ -2,7 +2,8 @@
 Toy Robot implementation using dotnet core
 
 run:
-
-$dotnet restore
-$dotnet test
-$dotnet run
+```{r, engine='bash', count_lines}
+$ dotnet restore
+$ dotnet test
+$ dotnet run
+```
