@@ -3,3 +3,4 @@ bin/
 project.lock.json
 .idea/
 *.sln.DotSettings.user
+packages/

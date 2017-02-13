@@ -1,4 +1,4 @@
-{
+﻿{
     "version": "1.0.0-*",
     "buildOptions": {
         "debugType": "portable",
@@ -23,7 +23,6 @@
         }
     },
     "runtimes": {
-        "ubuntu.16.04-x64": {},
-        "ubuntu.15.10-x64": {}
+        "ubuntu.16.04-x64": {}
     }
 }

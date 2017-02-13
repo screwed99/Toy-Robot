@@ -1,15 +1,14 @@
+using ToyRobot;
 using ToyRobot.Interfaces;
 
-namespace ToyRobot
+namespace NRobotsCannotOverlap
 {
     public sealed class ToyRobotAssembly
     {
         public readonly ToyRobotDriver ToyRobotDriver;
 
-        public ToyRobotAssembly(ITextInputter textInputter, ITextOutputter textOutputter)
+        public ToyRobotAssembly(ITextInputter textInputter, ITextOutputter textOutputter, int numRobots)
         {
-            var initialRobotState = new NotPlacedRobotState();
-            var toyRobot = new ToyRobot(initialRobotState);
             var robotStateFactory = new RobotStateFactory();
             var robotStateBuilderFactory = new RobotStateBuilderFactory();
             var leftOrientationTurner =
@@ -43,9 +42,23 @@ namespace ToyRobot
                     placeCommandParser
                 };
             var masterCommandParser = new MasterCommandParser(commandParsers);
-            var commandHandler = new CommandHandler(toyRobot, masterCommandParser);
-            var commandReader = new CommandReader(commandHandler);
+            var commandReader = InitializeCommandReader(numRobots, masterCommandParser);
             this.ToyRobotDriver = new ToyRobotDriver(textInputter, commandReader);
-        } 
+        }
+
+        private static ICommandReader InitializeCommandReader(
+            int numRobots,
+            ICommandParser commandParser)
+        {
+            var commandHandlers = new ICommandHandler[numRobots];
+            for (var i = 0; i < numRobots; i++)
+            {
+                var initialRobotState = new NotPlacedRobotState();
+                var toyRobot = new ToyRobot.ToyRobot(initialRobotState);
+                commandHandlers[i] = new CommandHandler(toyRobot, commandParser);
+            }
+
+            return new CommandReader(commandHandlers);
+        }
     }
 }

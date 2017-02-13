@@ -43,8 +43,8 @@ namespace PassInTableDimensions
                 placeCommandParser
             };
             var masterCommandParser = new MasterCommandParser(commandParsers);
-            var commandHander = new CommandHandler(toyRobot, masterCommandParser);
-            var commandReader = new CommandReader(commandHander);
+            var commandHandler = new CommandHandler(toyRobot, masterCommandParser);
+            var commandReader = new CommandReader(commandHandler);
             this.ToyRobotDriver = new ToyRobotDriver(textInputter, commandReader);
         }
     }
