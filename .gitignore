@@ -2,6 +2,4 @@ obj/
 bin/
 project.lock.json
 .idea/
-*.sln
 *.sln.DotSettings.user
-*.xproj
